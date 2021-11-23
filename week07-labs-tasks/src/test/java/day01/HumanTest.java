@@ -38,6 +38,12 @@ class HumanTest {
     }
 
     @Test
+    void testCreateNameNull() {
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> new Human(null, minYear));
+        assertEquals("Name cannot be null!", iae.getMessage());
+    }
+
+    @Test
     void testCreateNameBlank() {
         IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> new Human(" \n \r ", minYear));
         assertEquals("Name cannot be blank!", iae.getMessage());

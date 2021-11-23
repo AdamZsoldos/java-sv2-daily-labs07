@@ -21,12 +21,15 @@ public class Human {
     }
 
     public void setName(String name) {
-        if (name.isBlank()) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null!");
+        } else if (name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be blank!");
         } else if (!name.trim().contains(" ")) {
             throw new IllegalArgumentException("Name must contain at least two words!");
+        } else {
+            this.name = name;
         }
-        this.name = name;
     }
 
     public void setYearOfBirth(int yearOfBirth) {
@@ -36,7 +39,8 @@ public class Human {
             throw new IllegalArgumentException("Year of birth cannot be below minimum value of " + min + "!");
         } else if (yearOfBirth > max) {
             throw new IllegalArgumentException("Year of birth cannot exceed maximum value of " + max + "!");
+        } else {
+            this.yearOfBirth = yearOfBirth;
         }
-        this.yearOfBirth = yearOfBirth;
     }
 }
