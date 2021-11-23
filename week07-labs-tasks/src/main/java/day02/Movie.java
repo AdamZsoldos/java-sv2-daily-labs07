@@ -2,9 +2,9 @@ package day02;
 
 public class Movie {
 
-    private String title;
-    private int yearOfProduction;
-    private String director;
+    private final String title;
+    private final int yearOfProduction;
+    private final String director;
 
     public Movie(String title, int yearOfProduction, String director) {
         this.title = title;
