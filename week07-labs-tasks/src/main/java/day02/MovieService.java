@@ -10,20 +10,15 @@ public class MovieService {
 
     private final List<Movie> movies = new ArrayList<>();
 
-    public MovieService(Path path) {
+    public MovieService(Path path) throws IOException {
         addMoviesFromFile(path);
     }
 
-    private void addMoviesFromFile(Path path) {
-        try {
-            List<String> lines = Files.readAllLines(path);
-            for (String line : lines) {
-                addMovieFromLine(line);
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+    private void addMoviesFromFile(Path path) throws IOException {
+        List<String> lines = Files.readAllLines(path);
+        for (String line : lines) {
+            addMovieFromLine(line);
         }
-
     }
 
     private void addMovieFromLine(String line) {
