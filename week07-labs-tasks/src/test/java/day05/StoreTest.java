@@ -31,6 +31,13 @@ class StoreTest {
 
     @Test
     void testAddProduct() {
+        assertEquals(0, store.getProducts().size());
+        store.addProduct(new Product("apple", LocalDate.now(), 30));
+        assertEquals(1, store.getProducts().size());
+    }
+
+    @Test
+    void testAddProductIllegalDateSold() {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> store.addProduct(new Product("apple", LocalDate.now().plusDays(1), 30)));
         assertEquals("Date sold cannot be after current date.", e.getMessage());
     }
