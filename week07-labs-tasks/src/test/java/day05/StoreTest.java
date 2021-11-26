@@ -40,8 +40,10 @@ class StoreTest {
         for (Product product : products) {
             store.addProduct(product);
         }
-        Path path = tempDir.toPath().resolve("products.txt");
-        store.writeProductsSoldToFileByMonth(path, Month.FEBRUARY);
+        Month month = Month.FEBRUARY;
+        Path path = tempDir.toPath().resolve("products-" + month.name().toLowerCase() +".csv");
+        assertEquals("products-february.csv", path.getFileName().toString());
+        store.writeProductsSoldToFileByMonth(path, month);
         List<String> lines = Files.readAllLines(path);
         assertEquals(Arrays.asList(
                 "milk;1991-02-02;40",
