@@ -25,6 +25,8 @@ class StoreTest {
             new Product("coke", LocalDate.of(1994, 2, 5), 70),
             new Product("pepsi", LocalDate.of(1995, 3, 6), 80)
     );
+    Month month = Month.FEBRUARY;
+    String fileName = store.getMonthlyProductsFileName(month);
 
     @TempDir
     File tempDir;
@@ -45,13 +47,16 @@ class StoreTest {
     }
 
     @Test
+    void testGetMonthlyProductsFileName() {
+        assertEquals("products-february.csv", fileName);
+    }
+
+    @Test
     void testWriteProductsSoldToFileByMonth() throws IOException {
         for (Product product : products) {
             store.addProduct(product);
         }
-        Month month = Month.FEBRUARY;
-        Path path = tempDir.toPath().resolve("products-" + month.name().toLowerCase() +".csv");
-        assertEquals("products-february.csv", path.getFileName().toString());
+        Path path = tempDir.toPath().resolve(fileName);
         store.writeProductsSoldToFileByMonth(path, month);
         List<String> lines = Files.readAllLines(path);
         assertEquals(Arrays.asList(

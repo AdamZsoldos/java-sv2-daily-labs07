@@ -25,6 +25,10 @@ public class Store {
         writeProductsToFile(path, getProductsSoldByMonth(month));
     }
 
+    public String getMonthlyProductsFileName(Month month) {
+        return "products-" + month.name().toLowerCase() +".csv";
+    }
+
     private List<Product> getProductsSoldByMonth(Month month) {
         List<Product> productsByMonth = new ArrayList<>();
         for (Product product : products) {
@@ -38,7 +42,7 @@ public class Store {
     private void writeProductsToFile(Path path, List<Product> products) {
         List<String> lines = new ArrayList<>();
         for (Product product : products) {
-            lines.add(product.getName() + ';' + product.getDateSold().toString() + ';' + product.getPrice());
+            lines.add(product.toString());
         }
         try {
             Files.write(path, lines);
